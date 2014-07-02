@@ -16,5 +16,5 @@
             "Igormatkovic\\Memcache\\": "src/"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "dev"
 }
