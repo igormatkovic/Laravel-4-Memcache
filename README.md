@@ -6,7 +6,7 @@
 
 ### SetUp Application
 
-Composer
+**Composer**
 ```php
 "igormatkovic/memcache": "dev-master"
 ```
@@ -14,7 +14,7 @@ Composer
 
 
 
-Just add this to your app/start/global.php
+**Add this to your app/start/global.php**
 
 ```php
 use Illuminate\Cache\Repository;
@@ -30,3 +30,13 @@ Cache::extend('memcache', function($app) {
 	return new Repository(new MemcacheStore($memcache, $prefix));
 });
 ```
+
+
+**Update your driver app/config/cache.php**
+
+```php
+	'driver' => 'memcache',
+```
+
+
+**Notice: This memcache driver used the same config as Memcached**
