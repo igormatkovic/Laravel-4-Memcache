@@ -40,3 +40,6 @@ Cache::extend('memcache', function($app) {
 
 
 **Notice: This memcache driver used the same config as Memcached**
+
+
+This addon was build because of the Webtatic repo lacking Memcached Support :/
