@@ -37,9 +37,13 @@ Cache::extend('memcache', function($app) {
 ```php
 	'driver' => 'memcache',
 ```
+**Unittest view phpunit**
 
+```php
+	phpunit
+```
 
 **Notice: This memcache driver used the same config as Memcached**
 
 
-This addon was build because of the Webtatic repo lacking Memcached Support :/
+This addon was build because of the Webtatic repo lacking Memcache Support :/
