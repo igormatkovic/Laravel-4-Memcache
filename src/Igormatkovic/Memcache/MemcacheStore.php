@@ -42,9 +42,9 @@ class MemcacheStore extends TaggableStore implements StoreInterface {
 	 */
 	public function get($key)
 	{
-		$value = $this->memcache->get($this->prefix.$key);
-
-		return $value;
+		if( $value = $this->memcache->get($this->prefix.$key) ) {
+            return $value;
+        }
 	}
 
 	/**
