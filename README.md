@@ -43,7 +43,7 @@ Cache::extend('memcache', function($app) {
 	phpunit
 ```
 
-**Notice: This memcache driver used the same config as Memcached**
+**Notice: This memcache driver uses the same config as Memcached**
 
 
 This addon was build because of the Webtatic repo lacking Memcache Support :/
