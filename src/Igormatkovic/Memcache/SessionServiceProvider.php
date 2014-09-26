@@ -18,7 +18,8 @@ class SessionServiceProvider extends ServiceProvider {
         Cache::extend('memcache', function($app) {
             $servers = Config::get('cache.memcached');
             $prefix = Config::get('cache.prefix');
-            $memcache = (new MemcacheConnector())->connect($servers);
+            $memcache = new MemcacheConnector();
+            $memcache->connect($servers);
             return new Repository(new MemcacheStore($memcache, $prefix));
         });
         
