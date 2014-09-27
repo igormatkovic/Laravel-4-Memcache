@@ -32,7 +32,7 @@ class MemcacheServiceProvider extends ServiceProvider {
         {
             $session->extend('memcache', function($app)
             {
-                return new MemcacheHandler($this->app['cache']->driver('memcache'), Config::get('session.lifetime'));
+                return new MemcacheHandler($app['cache']->driver('memcache'), Config::get('session.lifetime'));
             });
         });
     }
