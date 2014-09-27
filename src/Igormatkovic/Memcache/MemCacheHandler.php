@@ -9,11 +9,11 @@ class MemcacheHandler implements SessionHandlerInterface {
      * @param  int  $minutes
      * @return void
      */
-	public function __construct(Repository $cache, $minutes)
+    public function __construct(Repository $cache, $minutes)
     {
         $this->cache = $cache;
         $this->minutes = $minutes;
-	}
+    }
 
     public function open($savePath, $sessionName)
     {
@@ -26,33 +26,33 @@ class MemcacheHandler implements SessionHandlerInterface {
     }
     
     public function read($sessionId)
-	{
-		return $this->cache->get($sessionId) ?: '';
-	}
-	
+    {
+        return $this->cache->get($sessionId) ?: '';
+    }
+    
     public function write($sessionId, $data)
     {
-		return $this->cache->put($sessionId, $data, $this->minutes);
+        return $this->cache->put($sessionId, $data, $this->minutes);
     }
     
     public function destroy($sessionId)
     {
-		return $this->cache->forget($sessionId);
+        return $this->cache->forget($sessionId);
     }
     
     public function gc($lifetime)
     {
         return true;
     }
-
-	/**
-	 * Get the underlying cache repository.
-	 *
-	 * @return \Illuminate\Cache\Repository
-	 */
-	public function getCache()
-	{ 
-		return $this->cache;
-	}
+    
+    /**
+     * Get the underlying cache repository.
+     *
+     * @return \Illuminate\Cache\Repository
+     */
+    public function getCache()
+    { 
+        return $this->cache;
+    }
 
 }
