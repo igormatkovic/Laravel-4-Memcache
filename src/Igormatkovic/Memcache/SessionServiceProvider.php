@@ -2,6 +2,7 @@
 
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Session\SessionManager;
 use Illuminate\Cache\Repository;
 // use Igormatkovic\Memcache\MemcacheStore;
 // use Igormatkovic\Memcache\MemcacheConnector;
@@ -31,7 +32,7 @@ class SessionServiceProvider extends ServiceProvider {
         {
             $session->extend('memcache', function($app)
             {
-                $manager = new \SessionManager($app);
+                $manager = new SessionManager($app);
 
                 return $manager->driver('memcache');
             });
