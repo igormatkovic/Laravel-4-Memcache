@@ -3,6 +3,7 @@
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Cache\Repository;
+use Illuminate\Cache\CacheManager;
 
 class MemcacheServiceProvider extends ServiceProvider {
 
@@ -30,6 +31,8 @@ class MemcacheServiceProvider extends ServiceProvider {
             $session->extend('memcache', function($app)
             {
                 // $manager = new SessionManager($app);
+                $manager = new CacheManager($app);
+                $cache = $manager->driver('memcache');
                 
                 $minutes = $app['config']['session.lifetime'];
                 return new MemcacheHandler($app['cache']->driver('memcache'), $minutes);
