@@ -21,7 +21,7 @@ class MemcacheServiceProvider extends ServiceProvider {
                 $servers = $app['config']['cache.memcached'];
                 $prefix = $app['config']['cache.prefix'];
                 $memcache = new MemcacheConnector();
-                $memcache->connect($servers);
+                $memcache = $memcache->connect($servers);
                 return new Repository(new MemcacheStore($memcache, $prefix));
             });
         });
