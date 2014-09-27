@@ -11,7 +11,7 @@ class MemcacheHandler implements \SessionHandlerInterface {
      * @param  int  $minutes
      * @return void
      */
-    public function __construct(Repository $cache, $minutes)
+    public function __construct(\Repository $cache, $minutes)
     {
         $this->cache = $cache;
         $this->minutes = $minutes;
