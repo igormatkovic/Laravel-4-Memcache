@@ -51,7 +51,7 @@ class MemcacheHandler implements SessionHandlerInterface {
 	 * @return \Illuminate\Cache\Repository
 	 */
 	public function getCache()
-	{
+	{ 
 		return $this->cache;
 	}
 
