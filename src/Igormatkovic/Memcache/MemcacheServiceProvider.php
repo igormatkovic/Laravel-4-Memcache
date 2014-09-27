@@ -1,7 +1,7 @@
 <?php namespace Igormatkovic\Memcache;
 
 
-// use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider;
 // use Illuminate\Session\SessionManager;
 use Illuminate\Cache\Repository;
 // use Igormatkovic\Memcache\MemcacheStore;
@@ -28,15 +28,16 @@ class MemcacheServiceProvider extends ServiceProvider {
             });
         });
         
-        // $this->app->resolving('session', function($session)
-        // {
-        //     $session->extend('memcache', function($app)
-        //     {
-        //         $manager = new SessionManager($app);
+        $this->app->resolving('session', function($session)
+        {
+            $session->extend('memcache', function($app)
+            {
+                return new MemcacheHandler;
+                // $manager = new SessionManager($app);
 
-        //         return $manager->driver('memcache');
-        //     });
-        // });
+                // return $manager->driver('memcache');
+            });
+        });
     }
 
 }
