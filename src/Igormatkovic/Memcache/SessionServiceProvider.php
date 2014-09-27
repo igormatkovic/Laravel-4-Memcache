@@ -15,6 +15,7 @@ class SessionServiceProvider extends ServiceProvider {
      */
     public function register()
     {
+        /*
         \Cache::extend('memcache', function($app) {
             $servers = Config::get('cache.memcached');
             $prefix = Config::get('cache.prefix');
@@ -22,6 +23,17 @@ class SessionServiceProvider extends ServiceProvider {
             $memcache->connect($servers);
             return new Repository(new MemcacheStore($memcache, $prefix));
         });
+        
+        $this->app->resolving('cache', function($cache)
+        {
+            $cache->extend('memcache', function($app)
+            {
+                $manager = new CachenManager($app);
+
+                return $manager->driver('memcache');
+            });
+        });
+        */
         
         $this->app->resolving('session', function($session)
         {
