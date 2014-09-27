@@ -29,7 +29,7 @@ class MemcacheServiceProvider extends ServiceProvider {
         {
             $session->extend('memcache', function($app)
             {
-                $manager = new SessionManager($app);
+                // $manager = new SessionManager($app);
                 
                 $minutes = $app['config']['session.lifetime'];
                 return new MemcacheHandler($app['cache']->driver('memcache'), $minutes);
