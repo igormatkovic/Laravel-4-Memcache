@@ -1,6 +1,8 @@
 <?php namespace Igormatkovic\Memcache;
 
-class MemcacheHandler implements SessionHandlerInterface {
+// use Illuminate\Support\ServiceProvider;
+
+class MemcacheHandler implements \SessionHandlerInterface {
 
     /**
      * Create a new cache driven handler instance.
