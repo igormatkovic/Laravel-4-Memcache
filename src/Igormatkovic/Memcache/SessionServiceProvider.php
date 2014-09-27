@@ -3,8 +3,8 @@
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Cache\Repository;
-use Igormatkovic\Memcache\MemcacheStore;
-use Igormatkovic\Memcache\MemcacheConnector;
+// use Igormatkovic\Memcache\MemcacheStore;
+// use Igormatkovic\Memcache\MemcacheConnector;
 
 class SessionServiceProvider extends ServiceProvider {
 
@@ -17,19 +17,14 @@ class SessionServiceProvider extends ServiceProvider {
     {
         $this->app->resolving('cache', function($cache)
         {
-            $servers = \Config::get('cache.memcached');
-            $prefix = \Config::get('cache.prefix');
-            $memcache = new MemcacheConnector();
-            $memcache->connect($servers);
-            return new Repository(new MemcacheStore($memcache, $prefix));
-        /*
             $cache->extend('memcache', function($app)
             {
-                $manager = new CachenManager($app);
-
-                return $manager->driver('memcache');
+                $servers = \Config::get('cache.memcached');
+                $prefix = \Config::get('cache.prefix');
+                $memcache = new MemcacheConnector();
+                $memcache->connect($servers);
+                return new Repository(new MemcacheStore($memcache, $prefix));
             });
-        */
         });
         
         $this->app->resolving('session', function($session)
