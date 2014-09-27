@@ -10,9 +10,9 @@ class MemcacheHandler implements SessionHandlerInterface {
 	 * @return void
 	 */
 	public function __construct(Repository $cache, $minutes)
-	{
-		$this->cache = $cache;
-		$this->minutes = $minutes;
+    {
+        $this->cache = $cache;
+        $this->minutes = $minutes;
 	}
 
     public function open($savePath, $sessionName)
