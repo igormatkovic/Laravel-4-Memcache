@@ -2,7 +2,7 @@
 
 class MemcacheHandler implements SessionHandlerInterface {
 
-	/**
+    /**
 	 * Create a new cache driven handler instance.
 	 *
 	 * @param  \Illuminate\Cache\Repository  $cache
