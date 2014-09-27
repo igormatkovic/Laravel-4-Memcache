@@ -15,7 +15,6 @@ class SessionServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-    {
         $this->app->resolving('cache', function($cache)
         {
             $servers = Config::get('cache.memcached');
