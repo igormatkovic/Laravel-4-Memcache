@@ -8,32 +8,44 @@ use Illuminate\Cache\CacheManager;
 class MemcacheServiceProvider extends ServiceProvider {
 
     /**
+   	 * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+	protected $defer = false;
+
+    /**
      * Register the service provider.
      *
      * @return void
      */
     public function register()
     {
-        $this->app->resolving('cache', function($cache)
+     	$servers = $this->app['config']['cache.memcached'];
+        $prefix = $this->app['config']['cache.prefix'];
+        $minutes = $this->app['config']['session.lifetime'];
+
+        $memcache = new MemcacheConnector();
+        $memcache = $memcache->connect($servers);
+        $repo = new Repository(new MemcacheStore($memcache, $prefix));
+        $handler = new MemcacheHandler($repo, $minutes);
+
+        $this->app->resolving('cache', function($cache) use ($repo)
         {
-            $cache->extend('memcache', function($app)
+            $cache->extend('memcache', function($app) use ($repo)
             {
-                $servers = $app['config']['cache.memcached'];
-                $prefix = $app['config']['cache.prefix'];
-                $memcache = new MemcacheConnector();
-                $memcache = $memcache->connect($servers);
-                return new Repository(new MemcacheStore($memcache, $prefix));
+             	return $repo;
             });
         });
-        
-        $this->app->resolving('session', function($session)
-        {
-            $session->extend('memcache', function($app)
+
+        $this->app->resolving('session', function($session) use ($handler)
+    	{
+            $session->extend('memcache', function($app) use ($handler)
             {
-                $minutes = $app['config']['session.lifetime'];
-                return new MemcacheHandler(\Cache::driver('memcache'), $minutes);
+                $manager = new MemcacheSessionManager($handler);
+
+                return $manager->driver('memcache');
             });
         });
     }
-
 }
