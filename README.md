@@ -6,15 +6,26 @@
 
 ### SetUp Application
 
-**Composer**
+Add the package to your composer.json and run composer update.
 ```php
 "igormatkovic/memcache": "dev-master"
 ```
 
+Add the memcache service provider in app/config/app.php:
 
+```php
+'Igormatkovic\Memcache\MemcacheServiceProvider',
+```
 
+You may now update your app/config/session.php config file to use memcache
 
-**Add this to your app/start/global.php**
+```php
+	'driver' => 'memcache',
+```
+
+**OR...**
+
+Add this to your app/start/global.php (Cache only)
 
 ```php
 use Illuminate\Cache\Repository;
@@ -32,12 +43,12 @@ Cache::extend('memcache', function($app) {
 ```
 
 
-**Update your driver app/config/cache.php**
+Update your driver app/config/cache.php
 
 ```php
 	'driver' => 'memcache',
 ```
-**Unittest view phpunit**
+Unit test view phpunit
 
 ```php
 	phpunit
